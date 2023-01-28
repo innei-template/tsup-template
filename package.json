@@ -1,0 +1,62 @@
+{
+  "name": "template",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "todo",
+  "author": "Innei",
+  "license": "MIT",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/*": {
+      "import": "./dist/*.js",
+      "require": "./dist/*.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "bump": {
+    "before": [
+      "git pull --rebase",
+      "pnpm i",
+      "npm run package"
+    ],
+    "after": [
+      "npm publish --access=public"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --ignore-path ./.prettierignore --write ",
+      "eslint --cache"
+    ]
+  },
+  "engines": {
+    "pnpm": ">=6"
+  },
+  "scripts": {
+    "package": "rm -rf dist && tsup",
+    "prepackage": "rm -rf dist",
+    "test": "vitest",
+    "dev": "vitest"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.14.186",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.0",
+    "tsup": "6.5.0"
+  },
+  "dependencies": {
+    "postcss": "^8.4.21"
+  }
+}
