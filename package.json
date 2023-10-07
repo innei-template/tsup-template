@@ -57,6 +57,6 @@
     "tsup": "6.6.3"
   },
   "dependencies": {
-    "postcss": "^8.4.21"
+    "postcss": "^8.4.31"
   }
 }
